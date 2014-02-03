@@ -1,22 +1,25 @@
 //
-//  LocationDetailViewController.m
+//  LocationDetailsViewController.m
 //  MyLocations
 //
 //  Created by Zhang Honghao on 2/1/14.
 //  Copyright (c) 2014 org-honghao. All rights reserved.
 //
 
-#import "LocationDetailViewController.h"
+#import "LocationDetailsViewController.h"
 #import "HudView.h"
+#import "Location.h"
 
-@interface LocationDetailViewController ()
+@interface LocationDetailsViewController ()
 
 @end
 
-@implementation LocationDetailViewController {
+@implementation LocationDetailsViewController {
     NSString *descriptionText;
     NSString *categoryName;
+    NSDate *date;
 }
+
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -31,6 +34,7 @@
     if ((self = [super initWithCoder:aDecoder])) {
         descriptionText = @"";
         categoryName = @"No Category";
+        date = [NSDate date];
     }
     return self;
 }
@@ -44,6 +48,10 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    if (self.locationToEdit != nil) {
+        self.title = @"Edit Location";
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonItemStyleDone target:self action:@selector(done:)];
+    }
     self.descriptionTextView.text = @"";
     self.categoryLabel.text = @"";
     
@@ -56,13 +64,15 @@
         self.addressLabel.text = @"No Address Found";
     }
     
-    self.dateLabel.text = [self formatDate:[NSDate date]];
+    self.dateLabel.text = [self formatDate:date];
     self.descriptionTextView.text = descriptionText;
     self.categoryLabel.text = categoryName;
     
     UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard:)];
     gestureRecognizer.cancelsTouchesInView = NO;
     [self.tableView addGestureRecognizer:gestureRecognizer];
+    
+    self.descriptionTextView.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning
@@ -178,8 +188,29 @@
 
 - (IBAction)done:(id)sender {
     HudView *hudView = [HudView hudInView:self.navigationController.view animated:YES];
-    hudView.text = @"Tagged";
-//    [self closeScreen];
+    Location *location = nil;
+    if (self.locationToEdit != nil) {
+        hudView.text = @"Updated";
+        location = self.locationToEdit;
+    } else {
+        hudView.text = @"Tagged";
+        location = [NSEntityDescription insertNewObjectForEntityForName:@"Location" inManagedObjectContext:self.managedObjectContext];
+    }
+
+    location.locationDescription = descriptionText;
+    location.category = categoryName;
+    location.latitude = [NSNumber numberWithDouble:self.coordinate.latitude];
+    location.longitude = [NSNumber numberWithDouble:self.coordinate.longitude];
+    location.date = date;
+    location.placemark = self.placemark;
+    
+    NSError *error;
+    if (![self.managedObjectContext save:&error]) {
+        FATAL_CORE_DATA_ERROR(error);
+        return;
+    }
+    
+    
     [self performSelector:@selector(closeScreen) withObject:nil afterDelay:0.6];
 }
 
@@ -226,11 +257,13 @@
 
 #pragma mark - UITextViewDelegate
 - (BOOL) textView: (UITextView *)theTextView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    
     descriptionText = [theTextView.text stringByReplacingCharactersInRange:range withString:text];
     return YES;
 }
 
 - (void)textViewDidEndEditing: (UITextView *)theTextView {
+    
     descriptionText = theTextView.text;
 }
 
@@ -249,5 +282,20 @@
     categoryName = theCategoryName;
     self.categoryLabel.text = categoryName;
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+#pragma mark - other methods
+- (void)setLocationToEdit:(Location *)newLocationToEdit
+{
+    if (_locationToEdit != newLocationToEdit) {
+        _locationToEdit = newLocationToEdit;
+        
+        descriptionText = _locationToEdit.locationDescription;
+        categoryName = _locationToEdit.category;
+        self.coordinate = CLLocationCoordinate2DMake([_locationToEdit.latitude doubleValue], [_locationToEdit.longitude doubleValue]);
+        self.placemark = _locationToEdit.placemark;
+        date = _locationToEdit.date;
+    }
 }
 @end

@@ -7,11 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1B47DED9189D5DA900DCD78B /* LocationDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B47DED8189D5DA900DCD78B /* LocationDetailViewController.m */; };
+		1B0CEFE4189FF41B00E1F826 /* LocationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0CEFE3189FF41B00E1F826 /* LocationsViewController.m */; };
+		1B0CEFE7189FFD4900E1F826 /* LocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0CEFE6189FFD4900E1F826 /* LocationCell.m */; };
+		1B47DED9189D5DA900DCD78B /* LocationDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B47DED8189D5DA900DCD78B /* LocationDetailsViewController.m */; };
 		1B47DEDC189D7C4C00DCD78B /* CategoryPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B47DEDB189D7C4C00DCD78B /* CategoryPickerViewController.m */; };
 		1B47DEDF189D8E0C00DCD78B /* HudView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B47DEDE189D8E0C00DCD78B /* HudView.m */; };
 		1B47DEE2189D944300DCD78B /* Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B47DEE0189D944300DCD78B /* Checkmark.png */; };
 		1B47DEE3189D944300DCD78B /* Checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B47DEE1189D944300DCD78B /* Checkmark@2x.png */; };
+		1B47DEE5189DBA9800DCD78B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B47DEE4189DBA9800DCD78B /* CoreData.framework */; };
+		1B47DEE8189DBABF00DCD78B /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1B47DEE6189DBABF00DCD78B /* DataModel.xcdatamodeld */; };
+		1B47DEEB189DBC7100DCD78B /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B47DEEA189DBC7100DCD78B /* Location.m */; };
 		1B9510FA189C1D9A0085B9D5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B9510F9189C1D9A0085B9D5 /* Foundation.framework */; };
 		1B9510FC189C1D9A0085B9D5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B9510FB189C1D9A0085B9D5 /* CoreGraphics.framework */; };
 		1B9510FE189C1D9A0085B9D5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B9510FD189C1D9A0085B9D5 /* UIKit.framework */; };
@@ -19,7 +24,6 @@
 		1B951106189C1D9A0085B9D5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B951105189C1D9A0085B9D5 /* main.m */; };
 		1B95110A189C1D9A0085B9D5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B951109189C1D9A0085B9D5 /* AppDelegate.m */; };
 		1B95110D189C1D9A0085B9D5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B95110B189C1D9A0085B9D5 /* Main.storyboard */; };
-		1B951113189C1D9A0085B9D5 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B951112189C1D9A0085B9D5 /* SecondViewController.m */; };
 		1B951115189C1D9A0085B9D5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B951114189C1D9A0085B9D5 /* Images.xcassets */; };
 		1B95111C189C1D9A0085B9D5 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B95111B189C1D9A0085B9D5 /* XCTest.framework */; };
 		1B95111D189C1D9A0085B9D5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B9510F9189C1D9A0085B9D5 /* Foundation.framework */; };
@@ -41,14 +45,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1B47DED7189D5DA900DCD78B /* LocationDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationDetailViewController.h; sourceTree = "<group>"; };
-		1B47DED8189D5DA900DCD78B /* LocationDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationDetailViewController.m; sourceTree = "<group>"; };
+		1B0CEFE2189FF41B00E1F826 /* LocationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationsViewController.h; sourceTree = "<group>"; };
+		1B0CEFE3189FF41B00E1F826 /* LocationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationsViewController.m; sourceTree = "<group>"; };
+		1B0CEFE5189FFD4900E1F826 /* LocationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationCell.h; path = ../LocationCell.h; sourceTree = "<group>"; };
+		1B0CEFE6189FFD4900E1F826 /* LocationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationCell.m; path = ../LocationCell.m; sourceTree = "<group>"; };
+		1B47DED7189D5DA900DCD78B /* LocationDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationDetailsViewController.h; sourceTree = "<group>"; };
+		1B47DED8189D5DA900DCD78B /* LocationDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationDetailsViewController.m; sourceTree = "<group>"; };
 		1B47DEDA189D7C4C00DCD78B /* CategoryPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryPickerViewController.h; sourceTree = "<group>"; };
 		1B47DEDB189D7C4C00DCD78B /* CategoryPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryPickerViewController.m; sourceTree = "<group>"; };
 		1B47DEDD189D8E0C00DCD78B /* HudView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HudView.h; sourceTree = "<group>"; };
 		1B47DEDE189D8E0C00DCD78B /* HudView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HudView.m; sourceTree = "<group>"; };
 		1B47DEE0189D944300DCD78B /* Checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Checkmark.png; sourceTree = "<group>"; };
 		1B47DEE1189D944300DCD78B /* Checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Checkmark@2x.png"; sourceTree = "<group>"; };
+		1B47DEE4189DBA9800DCD78B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		1B47DEE7189DBABF00DCD78B /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		1B47DEE9189DBC7100DCD78B /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Location.h; path = ../Location.h; sourceTree = "<group>"; };
+		1B47DEEA189DBC7100DCD78B /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Location.m; path = ../Location.m; sourceTree = "<group>"; };
 		1B9510F6189C1D9A0085B9D5 /* MyLocations.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyLocations.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B9510F9189C1D9A0085B9D5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1B9510FB189C1D9A0085B9D5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -62,8 +74,6 @@
 		1B95110C189C1D9A0085B9D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1B95110E189C1D9A0085B9D5 /* CurrentLocationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CurrentLocationViewController.h; sourceTree = "<group>"; };
 		1B95110F189C1D9A0085B9D5 /* CurrentLocationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CurrentLocationViewController.m; sourceTree = "<group>"; };
-		1B951111189C1D9A0085B9D5 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		1B951112189C1D9A0085B9D5 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		1B951114189C1D9A0085B9D5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		1B95111A189C1D9A0085B9D5 /* MyLocationsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyLocationsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B95111B189C1D9A0085B9D5 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -78,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B47DEE5189DBA9800DCD78B /* CoreData.framework in Frameworks */,
 				1B951132189C336B0085B9D5 /* CoreLocation.framework in Frameworks */,
 				1B9510FC189C1D9A0085B9D5 /* CoreGraphics.framework in Frameworks */,
 				1B9510FE189C1D9A0085B9D5 /* UIKit.framework in Frameworks */,
@@ -98,6 +109,44 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B0CEFE818A0127400E1F826 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1B47DEE0189D944300DCD78B /* Checkmark.png */,
+				1B47DEE1189D944300DCD78B /* Checkmark@2x.png */,
+				1B47DEDD189D8E0C00DCD78B /* HudView.h */,
+				1B47DEDE189D8E0C00DCD78B /* HudView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		1B0CEFE918A0129100E1F826 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				1B95110E189C1D9A0085B9D5 /* CurrentLocationViewController.h */,
+				1B95110F189C1D9A0085B9D5 /* CurrentLocationViewController.m */,
+				1B47DED7189D5DA900DCD78B /* LocationDetailsViewController.h */,
+				1B47DED8189D5DA900DCD78B /* LocationDetailsViewController.m */,
+				1B47DEDA189D7C4C00DCD78B /* CategoryPickerViewController.h */,
+				1B47DEDB189D7C4C00DCD78B /* CategoryPickerViewController.m */,
+				1B0CEFE2189FF41B00E1F826 /* LocationsViewController.h */,
+				1B0CEFE3189FF41B00E1F826 /* LocationsViewController.m */,
+				1B0CEFE5189FFD4900E1F826 /* LocationCell.h */,
+				1B0CEFE6189FFD4900E1F826 /* LocationCell.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		1B0CEFEA18A012BA00E1F826 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1B47DEE6189DBABF00DCD78B /* DataModel.xcdatamodeld */,
+				1B47DEE9189DBC7100DCD78B /* Location.h */,
+				1B47DEEA189DBC7100DCD78B /* Location.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		1B9510ED189C1D9A0085B9D5 = {
 			isa = PBXGroup;
 			children = (
@@ -120,6 +169,7 @@
 		1B9510F8189C1D9A0085B9D5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1B47DEE4189DBA9800DCD78B /* CoreData.framework */,
 				1B951131189C336B0085B9D5 /* CoreLocation.framework */,
 				1B9510F9189C1D9A0085B9D5 /* Foundation.framework */,
 				1B9510FB189C1D9A0085B9D5 /* CoreGraphics.framework */,
@@ -135,19 +185,10 @@
 				1B951108189C1D9A0085B9D5 /* AppDelegate.h */,
 				1B951109189C1D9A0085B9D5 /* AppDelegate.m */,
 				1B95110B189C1D9A0085B9D5 /* Main.storyboard */,
-				1B95110E189C1D9A0085B9D5 /* CurrentLocationViewController.h */,
-				1B95110F189C1D9A0085B9D5 /* CurrentLocationViewController.m */,
-				1B47DED7189D5DA900DCD78B /* LocationDetailViewController.h */,
-				1B47DED8189D5DA900DCD78B /* LocationDetailViewController.m */,
-				1B47DEDD189D8E0C00DCD78B /* HudView.h */,
-				1B47DEDE189D8E0C00DCD78B /* HudView.m */,
-				1B47DEDA189D7C4C00DCD78B /* CategoryPickerViewController.h */,
-				1B47DEDB189D7C4C00DCD78B /* CategoryPickerViewController.m */,
-				1B951111189C1D9A0085B9D5 /* SecondViewController.h */,
-				1B951112189C1D9A0085B9D5 /* SecondViewController.m */,
+				1B0CEFEA18A012BA00E1F826 /* Model */,
+				1B0CEFE818A0127400E1F826 /* Views */,
+				1B0CEFE918A0129100E1F826 /* ViewControllers */,
 				1B951114189C1D9A0085B9D5 /* Images.xcassets */,
-				1B47DEE0189D944300DCD78B /* Checkmark.png */,
-				1B47DEE1189D944300DCD78B /* Checkmark@2x.png */,
 				1B951100189C1D9A0085B9D5 /* Supporting Files */,
 			);
 			path = MyLocations;
@@ -281,11 +322,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1B47DED9189D5DA900DCD78B /* LocationDetailViewController.m in Sources */,
-				1B951113189C1D9A0085B9D5 /* SecondViewController.m in Sources */,
+				1B47DED9189D5DA900DCD78B /* LocationDetailsViewController.m in Sources */,
 				1B951135189C99510085B9D5 /* CurrentLocationViewController.m in Sources */,
+				1B0CEFE7189FFD4900E1F826 /* LocationCell.m in Sources */,
+				1B47DEE8189DBABF00DCD78B /* DataModel.xcdatamodeld in Sources */,
+				1B47DEEB189DBC7100DCD78B /* Location.m in Sources */,
 				1B95110A189C1D9A0085B9D5 /* AppDelegate.m in Sources */,
 				1B47DEDF189D8E0C00DCD78B /* HudView.m in Sources */,
+				1B0CEFE4189FF41B00E1F826 /* LocationsViewController.m in Sources */,
 				1B47DEDC189D7C4C00DCD78B /* CategoryPickerViewController.m in Sources */,
 				1B951106189C1D9A0085B9D5 /* main.m in Sources */,
 			);
@@ -508,6 +552,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		1B47DEE6189DBABF00DCD78B /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1B47DEE7189DBABF00DCD78B /* DataModel.xcdatamodel */,
+			);
+			currentVersion = 1B47DEE7189DBABF00DCD78B /* DataModel.xcdatamodel */;
+			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 1B9510EE189C1D9A0085B9D5 /* Project object */;
 }

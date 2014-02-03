@@ -7,7 +7,7 @@
 //
 
 #import "CurrentLocationViewController.h"
-#import "LocationDetailViewController.h"
+#import "LocationDetailsViewController.h"
 
 @interface CurrentLocationViewController ()
 
@@ -234,9 +234,13 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"TagLocation"]) {
         UINavigationController *navigationController = segue.destinationViewController;
-        LocationDetailViewController *controller = (LocationDetailViewController *) navigationController.topViewController;
+        LocationDetailsViewController *controller = (LocationDetailsViewController *) navigationController.topViewController;
+        
+        controller.managedObjectContext = self.managedObjectContext;
+        
         controller.coordinate = _location.coordinate;
         controller.placemark = _placemark;
+        
         
     }
 }
