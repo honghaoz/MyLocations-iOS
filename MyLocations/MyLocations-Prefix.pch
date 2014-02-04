@@ -15,6 +15,7 @@
     #import <Foundation/Foundation.h>
     #import <CoreLocation/CoreLocation.h>
     #import <CoreData/CoreData.h>
+    #import <MapKit/MapKit.h>
 #endif
 
 #define FATAL_CORE_DATA_ERROR(__error__)\
