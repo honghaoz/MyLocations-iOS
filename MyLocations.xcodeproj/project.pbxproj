@@ -34,6 +34,7 @@
 		1B951128189C1D9A0085B9D5 /* MyLocationsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B951127189C1D9A0085B9D5 /* MyLocationsTests.m */; };
 		1B951132189C336B0085B9D5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B951131189C336B0085B9D5 /* CoreLocation.framework */; };
 		1B951135189C99510085B9D5 /* CurrentLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B95110F189C1D9A0085B9D5 /* CurrentLocationViewController.m */; };
+		1BB34EAD18A1B0DD0082F53A /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BB34EAC18A1B0DD0082F53A /* UIImage+Resize.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +87,8 @@
 		1B951125189C1D9A0085B9D5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1B951127189C1D9A0085B9D5 /* MyLocationsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyLocationsTests.m; sourceTree = "<group>"; };
 		1B951131189C336B0085B9D5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		1BB34EAB18A1B0DD0082F53A /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
+		1BB34EAC18A1B0DD0082F53A /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +194,8 @@
 		1B9510FF189C1D9A0085B9D5 /* MyLocations */ = {
 			isa = PBXGroup;
 			children = (
+				1BB34EAB18A1B0DD0082F53A /* UIImage+Resize.h */,
+				1BB34EAC18A1B0DD0082F53A /* UIImage+Resize.m */,
 				1B951108189C1D9A0085B9D5 /* AppDelegate.h */,
 				1B951109189C1D9A0085B9D5 /* AppDelegate.m */,
 				1B95110B189C1D9A0085B9D5 /* Main.storyboard */,
@@ -336,6 +341,7 @@
 				1B0CEFE7189FFD4900E1F826 /* LocationCell.m in Sources */,
 				1B47DEE8189DBABF00DCD78B /* DataModel.xcdatamodeld in Sources */,
 				1B47DEEB189DBC7100DCD78B /* Location.m in Sources */,
+				1BB34EAD18A1B0DD0082F53A /* UIImage+Resize.m in Sources */,
 				1B95110A189C1D9A0085B9D5 /* AppDelegate.m in Sources */,
 				1B47DEDF189D8E0C00DCD78B /* HudView.m in Sources */,
 				1B0CEFE4189FF41B00E1F826 /* LocationsViewController.m in Sources */,

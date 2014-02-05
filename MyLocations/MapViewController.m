@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 org-honghao. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "MapViewController.h"
 #import "Location.h"
 #import "LocationDetailsViewController.h"
@@ -18,7 +19,7 @@
     NSArray *locations;
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder {
+- (id)initWithCoder:(NSCoder *)aDecoder {    
     if ((self = [super initWithCoder:aDecoder])) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(contextDidChange:) name:NSManagedObjectContextObjectsDidChangeNotification object:self.managedObjectContext];
     }

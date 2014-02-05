@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 org-honghao. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "LocationDetailsViewController.h"
 #import "HudView.h"
 #import "Location.h"
@@ -18,6 +19,10 @@
     NSString *descriptionText;
     NSString *categoryName;
     NSDate *date;
+    UIImage *image;
+    
+    UIActionSheet *actionSheet;
+    UIImagePickerController *imagePicker;
 }
 
 
@@ -35,6 +40,8 @@
         descriptionText = @"";
         categoryName = @"No Category";
         date = [NSDate date];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
     }
     return self;
 }
@@ -51,9 +58,23 @@
     if (self.locationToEdit != nil) {
         self.title = @"Edit Location";
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonItemStyleDone target:self action:@selector(done:)];
+        
+        if ([self.locationToEdit hasPhoto] && image == nil) {
+            UIImage *existingImage = [self.locationToEdit photoImage];
+            if (existingImage != nil) {
+                NSLog(@"existing is not nil\n");
+                [self showImage:existingImage];
+            }
+        }
     }
-    self.descriptionTextView.text = @"";
-    self.categoryLabel.text = @"";
+    
+    if (image != nil) {
+        NSLog(@"image is not nil\n");
+        [self showImage:image];
+    }
+    
+    self.descriptionTextView.text = descriptionText;
+    self.categoryLabel.text = categoryName;
     
     self.latitudeLabel.text = [NSString stringWithFormat:@"%.8f", self.coordinate.latitude];
     self.longitudeLabel.text = [NSString stringWithFormat:@"%.8f", self.coordinate.longitude];
@@ -63,10 +84,9 @@
     } else {
         self.addressLabel.text = @"No Address Found";
     }
-    
+
     self.dateLabel.text = [self formatDate:date];
-    self.descriptionTextView.text = descriptionText;
-    self.categoryLabel.text = categoryName;
+
     
     UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard:)];
     gestureRecognizer.cancelsTouchesInView = NO;
@@ -79,6 +99,19 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    if ([self isViewLoaded] && self.view.window == nil) {
+        self.view = nil;
+    }
+    if (![self isViewLoaded]) {
+		self.descriptionTextView = nil;
+		self.categoryLabel = nil;
+		self.latitudeLabel = nil;
+		self.longitudeLabel = nil;
+		self.addressLabel = nil;
+		self.dateLabel = nil;
+		self.imageView = nil;
+		self.photoLabel = nil;
+	}
 }
 
 - (void)hideKeyboard: (UIGestureRecognizer *)gestureRecognizer {
@@ -91,82 +124,11 @@
     [self.descriptionTextView resignFirstResponder];
 }
 
-//#pragma mark - Table view data source
-//
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-//{
-//#warning Potentially incomplete method implementation.
-//    // Return the number of sections.
-//    return 3;
-//}
-//
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-//{
-//#warning Incomplete method implementation.
-//    // Return the number of rows in the section.
-//    return 0;
-//}
-
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    static NSString *CellIdentifier = @"Cell";
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-//    
-//    // Configure the cell...
-//    
-//    return cell;
-//}
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a story board-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidEnterBackgroundNotification object:nil];
 }
 
- */
+
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0 || indexPath.section == 1) {
@@ -179,11 +141,48 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0 && indexPath.row == 0) {
         [self.descriptionTextView becomeFirstResponder];
+    } else if (indexPath.section == 1 && indexPath.row == 0) {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        [self showPhotoMenu];
     }
+}
+
+- (void)showPhotoMenu {
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        actionSheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Take Photo", @"Choose From Library", nil];
+        [actionSheet showInView:self.view];
+    } else {
+        [self choosePhotoFromLibrary];
+    }
+}
+
+- (void)takePhoto {
+    imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    imagePicker.delegate = self;
+    imagePicker.allowsEditing = YES;
+    [self.navigationController presentViewController:imagePicker animated:YES completion:nil];
+    
+}
+
+- (void)choosePhotoFromLibrary {
+    imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    imagePicker.delegate = self;
+    imagePicker.allowsEditing = YES;
+    [self.navigationController presentViewController:imagePicker animated:YES completion:nil];
 }
 
 - (void)closeScreen {
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (int)nextPhotoId
+{
+    int photoId = [[NSUserDefaults standardUserDefaults] integerForKey:@"PhotoID"];
+    [[NSUserDefaults standardUserDefaults] setInteger:photoId+1 forKey:@"PhotoID"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    return photoId;
 }
 
 - (IBAction)done:(id)sender {
@@ -195,6 +194,7 @@
     } else {
         hudView.text = @"Tagged";
         location = [NSEntityDescription insertNewObjectForEntityForName:@"Location" inManagedObjectContext:self.managedObjectContext];
+        location.photoId = @-1;
     }
 
     location.locationDescription = descriptionText;
@@ -203,6 +203,19 @@
     location.longitude = [NSNumber numberWithDouble:self.coordinate.longitude];
     location.date = date;
     location.placemark = self.placemark;
+    
+    if (image != nil) {
+        if (![location hasPhoto]) {
+            location.photoId = [NSNumber numberWithInt:[self nextPhotoId]];
+        }
+        
+        NSData *data = UIImagePNGRepresentation(image);
+        NSError *error;
+        if (![data writeToFile:[location photoPath] options:NSDataWritingAtomic error:&error]) {
+            NSLog(@"Error writing file: %@", error);
+        }
+    }
+
     
     NSError *error;
     if (![self.managedObjectContext save:&error]) {
@@ -241,6 +254,12 @@
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0 && indexPath.row == 0) {
         return 88;
+    } else if (indexPath.section == 1){
+        if (self.imageView.hidden) {
+            return 44;
+        } else {
+            return image.size.height / 2.0;
+        }
     } else if (indexPath.section == 2 && indexPath.row == 2) {
         CGRect rect = CGRectMake(100, 10, 190, 1000);
         self.addressLabel.frame = rect;
@@ -298,4 +317,57 @@
         date = _locationToEdit.date;
     }
 }
+
+
+#pragma mark - UIImagePickerControllerDelegate
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    image = [info objectForKey:UIImagePickerControllerEditedImage];
+    if ([self isViewLoaded]) {
+        [self showImage:image];
+        [self.tableView reloadData];
+    }
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    imagePicker = nil;
+}
+
+- (void)showImage: (UIImage *)theImage {
+    self.imageView.image = theImage;
+    self.imageView.hidden = NO;
+    self.imageView.frame = CGRectMake(100, 10, 520, 520);
+    self.imageView.contentMode = UIViewContentModeScaleToFill;
+    //[self.imageView drawRect:CGRectMake(10, 10, 260, 260)];
+    self.photoLabel.hidden = YES;
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    imagePicker = nil;
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)theActionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 0) {
+        [self takePhoto];
+    } else if (buttonIndex == 1) {
+        [self choosePhotoFromLibrary];
+    }
+    actionSheet = nil;
+}
+
+- (void) applicationDidEnterBackground {
+    if (imagePicker != nil) {
+        [self.navigationController dismissViewControllerAnimated:NO completion:nil];
+        imagePicker = nil;
+    }
+    
+    if (actionSheet != nil) {
+        [actionSheet dismissWithClickedButtonIndex:actionSheet.cancelButtonIndex animated:NO];
+        actionSheet = nil;
+    }
+    
+    [self.descriptionTextView resignFirstResponder];
+}
+
 @end

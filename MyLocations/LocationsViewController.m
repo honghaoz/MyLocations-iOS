@@ -6,10 +6,12 @@
 //  Copyright (c) 2014 org-honghao. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "LocationsViewController.h"
 #import "Location.h"
 #import "LocationCell.h"
 #import "LocationDetailsViewController.h"
+#import "UIImage+Resize.h"
 
 @interface LocationsViewController ()
 
@@ -99,6 +101,8 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         Location *location = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        
+        [location removePhotoFile];
         [self.managedObjectContext deleteObject:location];
         
         NSError *error;
@@ -130,6 +134,15 @@
                                           [location.latitude doubleValue],
                                           [location.longitude doubleValue]];
     }
+    
+    UIImage *image = nil;
+    if ([location hasPhoto]) {
+        image = [location photoImage];
+        if (image != nil) {
+            image = [image resizedImageWithBounds:CGSizeMake(66, 66)];
+        }
+    }
+    locationCell.imageView.image = image;
 }
 
 #pragma mark - Navigation

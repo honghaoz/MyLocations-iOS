@@ -12,5 +12,6 @@
 
 @property (nonatomic, strong) IBOutlet UILabel *descriptionLabel;
 @property (nonatomic, strong) IBOutlet UILabel *addressLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *imageView;
 
 @end
