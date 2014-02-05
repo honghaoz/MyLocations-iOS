@@ -10,6 +10,7 @@
 #import "LocationDetailsViewController.h"
 #import "HudView.h"
 #import "Location.h"
+#import "NSMutableString+AddText.h"
 
 @interface LocationDetailsViewController ()
 
@@ -232,11 +233,16 @@
 }
 
 - (NSString *)stringFromPlacemark: (CLPlacemark *)thePlacemark {
-    return [NSString stringWithFormat:@"%@ %@, %@, %@ %@, %@",
-            thePlacemark.subThoroughfare, thePlacemark.thoroughfare,
-            thePlacemark.locality,
-            thePlacemark.administrativeArea, thePlacemark.postalCode,
-            thePlacemark.country];
+    NSMutableString *line = [NSMutableString stringWithCapacity:100];
+    
+    [line addText:thePlacemark.subThoroughfare withSeparator:@""];
+    [line addText:thePlacemark.thoroughfare withSeparator:@" "];
+    [line addText:thePlacemark.locality withSeparator:@", "];
+    [line addText:thePlacemark.administrativeArea withSeparator:@", "];
+    [line addText:thePlacemark.postalCode withSeparator:@" "];
+    [line addText:thePlacemark.country withSeparator:@", "];
+    
+    return line;
 }
 
 - (NSString *)formatDate: (NSDate *)theDate {

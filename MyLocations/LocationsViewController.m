@@ -12,6 +12,7 @@
 #import "LocationCell.h"
 #import "LocationDetailsViewController.h"
 #import "UIImage+Resize.h"
+#import "NSMutableString+AddText.h"
 
 @interface LocationsViewController ()
 
@@ -124,10 +125,15 @@
     }
     
     if (location.placemark != nil) {
-        locationCell.addressLabel.text = [NSString stringWithFormat:@"%@ %@, %@",
-                                          location.placemark.subThoroughfare,
-                                          location.placemark.thoroughfare,
-                                          location.placemark.locality];
+ 		// Make a string that is: "subThoroughfare thoroughfare, locality".
+        
+        NSMutableString *string = [NSMutableString stringWithCapacity:100];
+        
+        [string addText:location.placemark.subThoroughfare withSeparator:@""];
+        [string addText:location.placemark.thoroughfare withSeparator:@" "];
+        [string addText:location.placemark.locality withSeparator:@", "];
+        
+        locationCell.addressLabel.text = string;
     } else {
         locationCell.addressLabel.text = [NSString stringWithFormat:
                                           @"Lat: %.8f, Long: %.8f",

@@ -35,6 +35,8 @@
 		1B951132189C336B0085B9D5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B951131189C336B0085B9D5 /* CoreLocation.framework */; };
 		1B951135189C99510085B9D5 /* CurrentLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B95110F189C1D9A0085B9D5 /* CurrentLocationViewController.m */; };
 		1BB34EAD18A1B0DD0082F53A /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BB34EAC18A1B0DD0082F53A /* UIImage+Resize.m */; };
+		1BB34EB018A1BAEA0082F53A /* NSMutableString+AddText.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BB34EAF18A1BAEA0082F53A /* NSMutableString+AddText.m */; };
+		1BB34EB418A1D2720082F53A /* Sound.caf in Resources */ = {isa = PBXBuildFile; fileRef = 1BB34EB318A1D2720082F53A /* Sound.caf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +91,9 @@
 		1B951131189C336B0085B9D5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		1BB34EAB18A1B0DD0082F53A /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
 		1BB34EAC18A1B0DD0082F53A /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
+		1BB34EAE18A1BAEA0082F53A /* NSMutableString+AddText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableString+AddText.h"; sourceTree = "<group>"; };
+		1BB34EAF18A1BAEA0082F53A /* NSMutableString+AddText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableString+AddText.m"; sourceTree = "<group>"; };
+		1BB34EB318A1D2720082F53A /* Sound.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Sound.caf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,7 +199,10 @@
 		1B9510FF189C1D9A0085B9D5 /* MyLocations */ = {
 			isa = PBXGroup;
 			children = (
+				1BB34EAE18A1BAEA0082F53A /* NSMutableString+AddText.h */,
+				1BB34EAF18A1BAEA0082F53A /* NSMutableString+AddText.m */,
 				1BB34EAB18A1B0DD0082F53A /* UIImage+Resize.h */,
+				1BB34EB218A1D2720082F53A /* Sound */,
 				1BB34EAC18A1B0DD0082F53A /* UIImage+Resize.m */,
 				1B951108189C1D9A0085B9D5 /* AppDelegate.h */,
 				1B951109189C1D9A0085B9D5 /* AppDelegate.m */,
@@ -235,6 +243,14 @@
 				1B951124189C1D9A0085B9D5 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1BB34EB218A1D2720082F53A /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				1BB34EB318A1D2720082F53A /* Sound.caf */,
+			);
+			path = Sound;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -315,6 +331,7 @@
 			files = (
 				1B951115189C1D9A0085B9D5 /* Images.xcassets in Resources */,
 				1B47DEE2189D944300DCD78B /* Checkmark.png in Resources */,
+				1BB34EB418A1D2720082F53A /* Sound.caf in Resources */,
 				1B951104189C1D9A0085B9D5 /* InfoPlist.strings in Resources */,
 				1B95110D189C1D9A0085B9D5 /* Main.storyboard in Resources */,
 				1B47DEE3189D944300DCD78B /* Checkmark@2x.png in Resources */,
@@ -347,6 +364,7 @@
 				1B0CEFE4189FF41B00E1F826 /* LocationsViewController.m in Sources */,
 				1B47DEDC189D7C4C00DCD78B /* CategoryPickerViewController.m in Sources */,
 				1B951106189C1D9A0085B9D5 /* main.m in Sources */,
+				1BB34EB018A1BAEA0082F53A /* NSMutableString+AddText.m in Sources */,
 				1B0CEFEF18A0B72C00E1F826 /* MapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
